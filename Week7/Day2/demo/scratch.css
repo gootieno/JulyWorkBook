@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,800&family=Roboto+Slab:wght@300;400&family=Roboto:ital,wght@0,100;0,500;1,100;1,500&display=swap');
+
+section > * > * {
+    border: 2px solid blue;
+}
+
+h2 {
+    font-family: 'Roboto Slab'
+}
