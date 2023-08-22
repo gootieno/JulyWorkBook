@@ -2,8 +2,12 @@
 
 section > * > * {
     border: 2px solid blue;
+    width: 2em;
 }
 
 h2 {
     font-family: 'Roboto Slab'
+}
+
+div {
 }
