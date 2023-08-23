@@ -1,0 +1,21 @@
+#parent {
+    border: 4px solid teal;
+    display: flex;
+    justify-content: space-between;
+    /* width: 50%; */
+    flex-wrap: wrap;
+}
+
+/* #parent > div {
+    border: 2px solid blue;
+} */
+
+.children {
+    border: 2px solid red;
+    height: 100px;
+    width: 50%;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
