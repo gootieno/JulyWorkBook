@@ -94,3 +94,9 @@ blockquote {
 blockquote:first-letter {
     font-size: 18pt;
 }
+
+@media screen and (max-width: 700px){
+    .example1 {
+        justify-content: flex-end;
+    }
+}
