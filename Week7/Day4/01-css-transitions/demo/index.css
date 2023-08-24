@@ -1,0 +1,91 @@
+:root {
+    --custom-background-color: #FFC017;
+}
+
+
+body, h2 {
+    margin: 0;
+}
+
+#header-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 50px;
+    border-bottom: 1px solid black;
+    align-items: center;
+    background-color: var(--custom-background-color);
+   
+}
+
+#header-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.header-name {
+    cursor: default;
+}
+
+.logo-image {
+    width: 40px;
+    height: 40px;
+}
+
+#nav-links-container {
+    display: inline-flex;
+    gap: 10px;
+}
+
+#nav-links-container > li {
+    list-style: none;
+}
+
+.nav-links {
+    text-decoration: none;
+    color: black;
+}
+
+.nav-button {
+    color: white;
+    border-radius: 25px;
+    background-color: black;
+    padding: 5px 10px;
+}
+
+#main-container {
+    display: flex;
+    background-color: var(--custom-background-color);
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+#curious-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    padding-left: 80px;
+}
+
+.curious-heading {
+    font-size: 4rem;
+}
+
+.curious-content {
+    font-size: 1.2rem;
+}
+
+.curious-button {
+    text-decoration: none;
+    padding: 8px 40px;
+    margin-top: 20px;
+    width: fit-content;
+    margin-bottom: 20px;
+}
+
+#eminem {
+    width: 40%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0;
+}
