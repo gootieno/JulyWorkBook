@@ -89,11 +89,26 @@ const server = http.createServer((req, res) => {
     // Phase 1: GET /dogs
     if (req.method === 'GET' && req.url === '/dogs') {
       // Your code here
+      const dogsHtml = fs.readFileSync('./views/dogs.html', 'utf-8');
+
+      const dogsList = dogs.map(dog => {
+        return `<li>${dog.name}</li>`
+      })
+
+      const resBody = dogsHtml.replace('#{dogsList}', dogsList.join(''))
+
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'text/html');
+      return res.end(resBody);
     }
 
     // Phase 2: GET /dogs/new
     if (req.method === 'GET' && req.url === '/dogs/new') {
       // Your code here
+      const createDog = fs.readFileSync('./views/create-dog.html', 'utf-8');
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'text/html');
+      res.end(createDog);
     }
 
     // Phase 3: GET /dogs/:dogId
@@ -103,12 +118,38 @@ const server = http.createServer((req, res) => {
         const dogId = urlParts[2];
         const dog = dogs.find(dog => dog.dogId === Number(dogId));
         // Your code here
+        if (!dog) {
+
+          const errorPage = fs.readFileSync('./views/error.html', 'utf-8');
+          const resBody = errorPage.replace(/#{message}/g, 'Dog not found');
+          res.statusCode = 404;
+          res.setHeader('Content-Type', 'text/html');
+          return res.end(resBody);
+        }
+        const dogDetails = fs.readFileSync('./views/dog-details.html', 'utf-8');
+        const resBody = dogDetails.replace(/#{name}/g, dog.name).replace('#{age}', dog.age)
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/html');
+        return res.end(resBody);
       }
     }
 
     // Phase 4: POST /dogs
     if (req.method === 'POST' && req.url === '/dogs') {
       // Your code here
+      const { name, age } = req.body;
+
+      const dog = {
+        dogId: getNewDogId(),
+        name,
+        age
+      }
+
+      dogs.push(dog);
+
+      res.statusCode = 302;
+      res.setHeader('Location', '/dogs' + dog.dogId);
+      return res.end();
     }
 
     // Phase 5: GET /dogs/:dogId/edit
@@ -118,6 +159,19 @@ const server = http.createServer((req, res) => {
         const dogId = urlParts[2];
         const dog = dogs.find(dog => dog.dogId === Number(dogId));
         // Your code here
+        if (!dog) {
+
+          const errorPage = fs.readFileSync('./views/error.html', 'utf-8');
+          const resBody = errorPage.replace(/#{message}/g, 'Dog not found');
+          res.statusCode = 404;
+          res.setHeader('Content-Type', 'text/html');
+          return res.end(resBody);
+        }
+        const editDog = fs.readFileSync('./views/edit-dog.html', 'utf-8');
+        const resBody = editDog.replace('#{dogId}', dog.dogId).replace('#{name}', dog.name).replace('#{age}', dog.age)
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/html');
+        return res.end(resBody);
       }
     }
 
@@ -128,6 +182,21 @@ const server = http.createServer((req, res) => {
         const dogId = urlParts[2];
         const dog = dogs.find(dog => dog.dogId === Number(dogId));
         // Your code here
+        if (!dog) {
+
+          const errorPage = fs.readFileSync('./views/error.html', 'utf-8');
+          const resBody = errorPage.replace(/#{message}/g, 'Dog not found');
+          res.statusCode = 404;
+          res.setHeader('Content-Type', 'text/html');
+          return res.end(resBody);
+        }
+        const { name, age } = req.body;
+        dog.name = name;
+        dog.age = age;
+
+        res.statusCode = 302;
+        res.setHeader('Location', '/dogs' + dog.dogId);
+        return res.end();
       }
     }
 
