@@ -57,20 +57,27 @@ const server = http.createServer((req, res) => {
   req.on("data", (data) => {
     reqBody += data;
   });
-
+//reqbody = 'username=new+user&password=password%21'
   // When the request is finished processing the entire body
   req.on("end", () => {
     // Parsing the body of the request
     if (reqBody) {
       req.body = reqBody
-        .split("&")
-        .map((keyValuePair) => keyValuePair.split("="))
-        .map(([key, value]) => [key, value.replace(/\+/g, " ")])
-        .map(([key, value]) => [key, decodeURIComponent(value)])
+        .split("&") //[username=new+user, password=password%21]
+        .map((keyValuePair) => keyValuePair.split("=")) //[[username, new+user], [password, password%21]]
+        .map(([key, value]) => [key, value.replace(/\+/g, " ")]) //[[username, new user], [password, password%21]]
+        .map(([key, value]) => [key, decodeURIComponent(value)]) //[[username, new user], [password, password!]]
         .reduce((acc, [key, value]) => {
           acc[key] = value;
           return acc;
         }, {});
+        /*
+        {
+          username: 'new user',
+          password: 'password!'
+        }
+
+        */
       console.log(req.body);
     }
 
