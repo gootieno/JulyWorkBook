@@ -29,9 +29,12 @@ function liftWeights() {
 
 function workout() {
   // Your code here
-  stretch().then(() => runOnTreadmill()).then(liftWeights).then(() => console.log('done working out'))
-}
+  stretch()
+  .then(() => runOnTreadmill())
+  .then(liftWeights)
+  .then(console.log('done working out'))
 
+}
 
 /* ============================ TEST YOUR CODE ============================
 
@@ -40,7 +43,8 @@ output.
 */
 
 
-workout();
+workout(() => {
+});
 
   // should print out the following:
     // done stretching
