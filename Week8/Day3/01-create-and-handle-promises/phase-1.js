@@ -1,5 +1,11 @@
 function stretch() {
   // Your code here
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log('done stretching');
+      resolve();
+    }, 1000)
+  })
 }
 
 function runOnTreadmill() {
@@ -22,7 +28,9 @@ output.
 */
 
 
-workout();
+workout(() => {
+});
+
   // should print out the following:
     // done stretching
     // done running on treadmill

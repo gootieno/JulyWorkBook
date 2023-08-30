@@ -1,6 +1,17 @@
 function stretch(timeLeft) {
   // refactor your code from phase 1
   // Your code here
+  return new Promise((resolve, reject) => {
+    if (timeLeft < 1000) {
+      reject('Not enough time to stretch')
+    } else {
+      timeLeft - 1000;
+      setTimeout(() => {
+        console.log('Done stretching');
+        resolve(timeLeft)
+      }, 1000)
+    }
+  })
 }
 
 
@@ -19,6 +30,7 @@ function liftWeights(timeLeft) {
 function workout(totalTime) {
   // refactor your code from phase 1
   // Your code here
+  stretch().then((timeLeft) => runOnTreadmill(timeLeft))
 }
 
 /* ============================ TEST YOUR CODE ============================
