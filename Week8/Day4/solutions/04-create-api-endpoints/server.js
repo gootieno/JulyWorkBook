@@ -65,15 +65,27 @@ const server = http.createServer((req, res) => {
       if (urlParts.length === 3) {
         const dogId = urlParts[2];
         // Your code here
+        const dog = dogs.find(dog => dog.dogId === Number(dogId))
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        return res.end(JSON.stringify(dog));
       }
       return res.end();
     }
 
     // POST /dogs
     if (req.method === 'POST' && req.url === '/dogs') {
-      const { name, age } = req.body;
+      const { name, age } = req.body; // 'tanner', '32'
       // Your code here
-      return res.end();
+      const newDog = {
+        dogId: getNewDogId(),
+        name,
+        age
+      }
+      dogs.push(newDog);
+      res.statusCode = 201;
+      res.setHeader('Content-Type', 'application/json');
+      return res.end(JSON.stringify(newDog));
     }
 
     // PUT or PATCH /dogs/:dogId
@@ -83,8 +95,24 @@ const server = http.createServer((req, res) => {
         const dogId = urlParts[2];
 
         // Your code here
+        const dog = dogs.find(dog => dog.dogId == dogId);
+        const { name, age } = req.body;
+
+        if (name) {
+          dog.name = name
+        }
+        if (age) {
+          dog.age = age
+        }
+
+        // dog.name = name || dog.name;
+        // dog.age = age || dog.age;
+
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        return res.end(JSON.stringify(dog));
       }
-      return res.end();
+      return res.end(JSON.stringify({message: "Invalid path"}));
     }
 
     // DELETE /dogs/:dogId
@@ -93,6 +121,19 @@ const server = http.createServer((req, res) => {
       if (urlParts.length === 3) {
         const dogId = urlParts[2];
         // Your code here
+        const dogIndex = dogs.findIndex(dog => dog.dogId == dogId);
+
+        if (dogIndex === -1) {
+          res.statusCode = 404;
+          res.setHeader("Content-Type", 'application/json');
+          return res.end(JSON.stringify({message: "Dog not found"}))
+        }
+        
+        dogs.splice(dogIndex, 1);
+
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        return res.end(JSON.stringify({message: "Dog successfully deleted"}))
       }
       return res.end();
     }
