@@ -145,8 +145,11 @@ const server = http.createServer((req, res) => {
 
     res.statusCode = 404;
     res.setHeader("Content-Type", "text/html");
-    res.write(resBody);
-    return res.end();
+    res.write('whatever')
+    res.write('i')
+    
+
+    return res.end(resBody);
   });
 });
 
