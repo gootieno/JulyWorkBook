@@ -10,7 +10,18 @@ Paste your code for fetch requests here once you finish each task.
 */
 
 // Your code here
-fetch('/posts').then(response => response.json()).then(resText => console.log(resText))
+fetch('/posts').then((response) => {
+  console.log({
+  stats: response.status,
+  headers: response.headers.get('Content-Type'),
+  ok: response.ok,
+  url: response.url
+})
+return response.json()
+}
+)
+.then(jsonBody => console.log(jsonBody))
+
 
 async function getJson () {
   const response = await fetch('/posts');
@@ -30,7 +41,9 @@ async function getJson () {
 
 
 fetch('/posts', {
-  method: // POST
-  headers: {} // application/json
-  body: //JSON.stringify()
+  method: "POST",
+  headers: {'Content-Type': 'application/json'}, // application/json
+  body: JSON.stringify({message: "new message"})
 })
+.then(response => response.json())
+.then(jsonBody => console.log(jsonBody))

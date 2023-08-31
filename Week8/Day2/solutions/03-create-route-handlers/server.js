@@ -37,8 +37,9 @@ const server = http.createServer((req, res) => {
 
     if (req.method === 'GET' && req.url === '/') {
       res.statusCode = 200;
-      res.setHeader('Content-Type', 'text/plain');
-      return res.end('Dog Club');
+      res.setHeader('Content-Type', 'text/html');
+      const html = fs.readFileSync('./view/dog.html', 'utf-8')
+      return res.end(html);
     }
     if (req.method === 'GET' && req.url === '/dogs') {
       res.statusCode = 200;
