@@ -41,23 +41,22 @@ fetch("/products", {
 /* ============================== Phase 3 ============================== */
 
 //!!START
-const params = new URLSearchParams({
-  name: "Caribbean Delight Coffee",
-  description: "Made by Manatee Coffee",
-  price: 11.99,
-  categories: "grocery",
-  categories: 'health'
-});
+// const params = new URLSearchParams({
+//   name: "Caribbean Delight Coffee",
+//   description: "Made by Manatee Coffee",
+//   price: 11.99,
+//   categories: "grocery",
+//   categories: 'health'
+// });
 // params.append("categories", "health"); // if you want to add other categories
 fetch("/products", {
   method: "POST",
-  body: params,
+  body: JSON.stringify(),
   headers: {
-    "Content-Type": "application/x-www-form-urlencoded"
+    "Content-Type": "application/x-www-form-urlencoded" //
   }
 }).then(res => {
   console.log({
     redirected: res.redirected // true
   });
 });
-

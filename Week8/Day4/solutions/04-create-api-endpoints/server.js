@@ -80,6 +80,7 @@ const server = http.createServer((req, res) => {
       const urlParts = req.url.split('/');
       if (urlParts.length === 3) {
         const dogId = urlParts[2];
+        
         // Your code here
       }
       return res.end();

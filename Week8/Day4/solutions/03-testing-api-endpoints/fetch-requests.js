@@ -10,13 +10,27 @@ Paste your code for fetch requests here once you finish each task.
 */
 
 // Your code here
+fetch('/posts').then(response => response.json()).then(resText => console.log(resText))
 
-
+async function getJson () {
+  const response = await fetch('/posts');
+  const json = await response.json();
+  console.log(json);
+}
 
 /* =============================== Phase 2 ================================ */
 /*
   Make a request with fetch request to POST /posts and print the response
   components to the console.
-*/
+
+
 
 // Your code here
+*/
+
+
+fetch('/posts', {
+  method: // POST
+  headers: {} // application/json
+  body: //JSON.stringify()
+})
