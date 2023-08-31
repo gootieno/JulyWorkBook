@@ -5,6 +5,11 @@ const dogs = [
     dogId: 1,
     name: "Fluffy",
     age: 2
+  },
+  {
+    dogId: 2,
+    name: "Rod",
+    age: 10
   }
 ];
 
@@ -117,7 +122,7 @@ const server = http.createServer((req, res) => {
 
     // DELETE /dogs/:dogId
     if (req.method === 'DELETE' && req.url.startsWith('/dogs/')) {
-      const urlParts = req.url.split('/');
+      const urlParts = req.url.split('/'); // ['', 'dogs', '1']
       if (urlParts.length === 3) {
         const dogId = urlParts[2];
         // Your code here
@@ -128,7 +133,7 @@ const server = http.createServer((req, res) => {
           res.setHeader("Content-Type", 'application/json');
           return res.end(JSON.stringify({message: "Dog not found"}))
         }
-        
+
         dogs.splice(dogIndex, 1);
 
         res.statusCode = 200;
