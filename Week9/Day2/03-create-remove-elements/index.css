@@ -52,3 +52,6 @@
     font-size: 1.25rem;
 }
 
+.gallery > ul > li.new-dogs {
+    border: 3px solid blue;
+}
