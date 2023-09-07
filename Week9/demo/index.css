@@ -1,0 +1,7 @@
+[data-empty="not-empty"]{
+    background-color: teal;
+}
+
+[data-empty="empty"]{
+    background-color: red;
+}
