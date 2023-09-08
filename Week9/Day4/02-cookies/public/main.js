@@ -1,3 +1,16 @@
+const cookieParser = () => {
+    /*
+     0. create an obj for holding key-val 
+     1. get all cookies 
+     2. split the cookies into an array 
+        * possibly 2 loops
+     3. get the key value pairs
+     4. set the key vals to the obj
+
+    */
+}
+
+
 /* ============================== PHASE 1 + 2 ============================== */
 
 // For storing user's theme selection in cookies
