@@ -13,8 +13,16 @@ const cookieParser = () => {
   console.log("all cookies ", allCookies);
   const cookieArr = allCookies.split("; ");
   console.log("cookie arr ", cookieArr);
+  cookieArr.forEach((cookie) => {
+    const splitCookies = cookie.split("=");
+    console.log("split cookies ", splitCookies);
+    const key = splitCookies[0];
+    const val = splitCookies[1];
+    cookieObj[key] = val;
+  });
 
-  
+  console.log("cookie object ", cookieObj);
+  return cookieObj;
 };
 
 /* ============================== PHASE 1 + 2 ============================== */
@@ -22,17 +30,19 @@ const cookieParser = () => {
 // For storing user's theme selection in cookies
 function storeTheme(themeName) {
   // Your code here
-  document.cookie = `themeName=${themeName};max-age=20`;
+  //   document.cookie = `themeName=${themeName};max-age=20`;
+  document.cookie = `themeName=${themeName}`;
 }
 
 // For restoring theme from cookies, if selected by the user in the past
 function restoreTheme() {
   // Your code here
-  cookieParser();
-  const allCookies = document.cookie;
-  console.log("all cookies ", allCookies);
-  const themeName = allCookies.split("=")[1];
-  console.log("theme name ", themeName);
+  //   const allCookies = document.cookie;
+  //   console.log("all cookies ", allCookies);
+  //   const themeName = allCookies.split("=")[1];
+  //   console.log("theme name ", themeName);
+  const parsedCookies = cookieParser();
+  const themeName = parsedCookies["themeName"];
   if (themeName) setTheme(themeName);
 }
 
@@ -47,16 +57,21 @@ function clearTheme() {
 // For storing user's display name in cookies
 function storeName(displayName) {
   // Your code here
+  document.cookie = `displayName=${displayName}`;
 }
 
 // For restoring user's display name from cookies, if set in the past
 function restoreName() {
   // Your code here
+  const parsedCookies = cookieParser();
+  const displayName = parsedCookies["displayName"];
+  if (displayName) setInputValue("display-name", displayName);
 }
 
 // For clearing user's display name from cookies
 function clearName() {
   // Your code here
+  document.cookie = `displayName=;max-age=0`;
 }
 
 /* ========================================================================= */
